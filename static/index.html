@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Customer Service Router</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>AI Customer Service Router</h1>
+            <p>Watch as AI classifies customer queries and routes them to the right agents in real-time</p>
+        </div>
+
+        <div class="demo-section">
+            <div class="input-panel">
+                <h3>📝 Customer Message</h3>
+                <textarea id="customerMessage" placeholder="Enter a customer support message here...">I can't log into my account, the password reset isn't working</textarea>
+                
+                <div class="example-buttons">
+                    <button class="example-btn" onclick="setExample('I was charged twice for my order, can you help me get a refund?')">Billing Issue</button>
+                    <button class="example-btn" onclick="setExample('My package was supposed to arrive yesterday but I still haven\'t received it')">Delivery Problem</button>
+                    <button class="example-btn" onclick="setExample('I want to return this broken laptop I bought last week')">Return Request</button>
+                    <button class="example-btn" onclick="setExample('How do I cancel my order? The cancel button isn\'t working')">Cancellation</button>
+                    <button class="example-btn" onclick="setExample('What\'s the warranty on this product?')">Warranty Question</button>
+                </div>
+
+                <button class="classify-btn" onclick="classifyMessage()" id="classifyBtn">
+                    Classify & Route Message
+                </button>
+            </div>
+
+            <div class="flow-visualization">
+                <h3>Processing Flow</h3>
+                <div class="flow-steps">
+                    <div class="flow-step" id="step1">
+                        <div class="step-icon">1</div>
+                        <div class="step-content">
+                            <div class="step-title">Message Received</div>
+                            <div class="step-description">Customer message captured and queued for processing</div>
+                        </div>
+                    </div>
+
+                    <div class="flow-step" id="step2">
+                        <div class="step-icon">2</div>
+                        <div class="step-content">
+                            <div class="step-title">AI Analysis</div>
+                            <div class="step-description">OpenAI GPT analyzes message intent and context</div>
+                        </div>
+                    </div>
+
+                    <div class="flow-step" id="step3">
+                        <div class="step-icon">3</div>
+                        <div class="step-content">
+                            <div class="step-title">Intent Classification</div>
+                            <div class="step-description">Message classified into one of 10 specific categories</div>
+                        </div>
+                    </div>
+
+                    <div class="flow-step" id="step4">
+                        <div class="step-icon">4</div>
+                        <div class="step-content">
+                            <div class="step-title">Agent Assignment</div>
+                            <div class="step-description">Routed to specialized agent based on classification</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="result-panel" id="resultPanel">
+            <div class="result-header">Classification Complete!</div>
+            <div class="result-details">
+                <div class="result-item">
+                    <div class="result-label">Intent Detected</div>
+                    <div class="result-value" id="detectedIntent">-</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Assigned Agent</div>
+                    <div class="result-value" id="assignedAgent">-</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Processing Time</div>
+                    <div class="result-value" id="processingTime">-</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tech-stack">
+            <h3>Built With</h3>
+            <div class="tech-badges">
+                <span class="tech-badge go">Go</span>
+                <span class="tech-badge openai">OpenAI</span>
+                <span class="tech-badge api">REST API</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
+EOF
