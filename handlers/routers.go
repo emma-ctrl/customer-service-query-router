@@ -47,3 +47,19 @@ func (rh *RouterHandler) RouteQuery(w http.ResponseWriter, r *http.Request) {
     w.Header().Set("Content-Type", "application/json")
     json.NewEncoder(w).Encode(response)
 }
+
+// GetAgents returns all agents and their status
+func (rh *RouterHandler) GetAgents(w http.ResponseWriter, r *http.Request) {
+    agents := rh.agentService.GetAllAgents()
+    
+    w.Header().Set("Content-Type", "application/json")
+    json.NewEncoder(w).Encode(agents)
+}
+
+// GetAgentStats returns system statistics
+func (rh *RouterHandler) GetAgentStats(w http.ResponseWriter, r *http.Request) {
+    stats := rh.agentService.GetAgentStats()
+    
+    w.Header().Set("Content-Type", "application/json")
+    json.NewEncoder(w).Encode(stats)
+}
