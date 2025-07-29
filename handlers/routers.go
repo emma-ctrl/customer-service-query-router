@@ -9,11 +9,13 @@ import (
 
 type RouterHandler struct {
     agentService *services.AgentService
+	conversationService *services.ConversationService 
 }
 
-func NewRouterHandler(agentService *services.AgentService) *RouterHandler {
+func NewRouterHandler(agentService *services.AgentService, conversationService *services.ConversationService) *RouterHandler {
     return &RouterHandler{
         agentService: agentService,
+		conversationService: conversationService,
     }
 }
 
@@ -62,4 +64,29 @@ func (rh *RouterHandler) GetAgentStats(w http.ResponseWriter, r *http.Request) {
     
     w.Header().Set("Content-Type", "application/json")
     json.NewEncoder(w).Encode(stats)
+}
+
+func (rh *RouterHandler) TestConversations(w http.ResponseWriter, r *http.Request) {
+    // This is just to test our file reading
+    response := map[string]interface{}{
+        "message": "Conversation loading test",
+        "total_conversations": len(rh.conversationService.GetConversations()),
+    }
+    
+    // Show first few customer messages as examples
+    conversations := rh.conversationService.GetConversations()
+    examples := []string{}
+    
+    for i, conv := range conversations {
+        if i >= 3 { // Just show first 3
+            break
+        }
+        firstMessage := rh.conversationService.GetFirstCustomerMessage(conv)
+        examples = append(examples, firstMessage)
+    }
+    
+    response["examples"] = examples
+    
+    w.Header().Set("Content-Type", "application/json")
+    json.NewEncoder(w).Encode(response)
 }
